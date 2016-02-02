@@ -22,7 +22,7 @@ String = namedtuple('String', ['key', 'value', 'comment'])
 def read_cmd():
     parser = argparse.ArgumentParser()
     parser.add_argument('-o', '--output', help='Command output directory', default='.')
-    parser.add_argument('filepath', help='file to generate strings from')
+    parser.add_argument('filepaths', help='file(s) to generate strings from', type=argparse.FileType('r'), nargs='+')
     args = parser.parse_args()
     return args
 
@@ -62,14 +62,15 @@ def generate_string(params):
     return String(key, value, comment)
 
 
-def grep_file(filepath):
+def grep_file(filepaths):
     strings = []
-    with io.open(filepath, encoding='utf-8') as fp:
-        content = fp.read()
-        for match in string_pattern.finditer(content):
-            params = match.group(1)
-            string = generate_string(params)
-            strings.append(string)
+    for filepath in filepaths:
+        with io.open(filepath.name, encoding='utf-8') as fp:
+			content = fp.read()
+			for match in string_pattern.finditer(content):
+				params = match.group(1)
+				string = generate_string(params)
+				strings.append(string)
     return strings
 
 
@@ -82,7 +83,7 @@ def save_strings(output_dir, strings):
 
 def main():
     args = read_cmd()
-    strings = grep_file(args.filepath)
+    strings = grep_file(args.filepaths)
     save_strings(args.output, strings)
 
 

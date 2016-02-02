@@ -8,7 +8,7 @@ OUTPUT_FILE = 'Localizable.strings'
 OUTPUT_ENCODING = 'utf-16'
 OUTPUT_LINE_PATTERN = u'/* {comment} */\n"{key}" = "{value}";\n\n'
 
-pattern = re.compile('/\* ([^"]*) \*/\s"([^"]*)" = "([^"]*)";')
+pattern = re.compile(r'/\* ([^"]*) \*/\s"([^"]*)" = "((?:\\.|[^"\\])*)";')
 String = namedtuple('String', ['key', 'value', 'comment'])
 
 
