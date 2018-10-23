@@ -5,3 +5,9 @@ CHANGES
 ------------------
 
 - Initial release.
+
+0.2.0 (2018-10-23)
+------------------
+
+- Additional CLI Arguments added
+- Class-based GenStrings File Structure

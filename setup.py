@@ -2,11 +2,12 @@ import os
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
-version = '0.1.0'
+version = '0.2.0'
 
 
 def read(f):
     return open(os.path.join(os.path.dirname(__file__), f)).read().strip()
+
 
 setup(name='genstrings_swift',
       version=version,
@@ -28,4 +29,4 @@ setup(name='genstrings_swift',
               'genstrings_swift = genstrings_swift:main',
               'genstrings_merge = genstrings_merge:main']
       },
-      include_package_data = False)
+      include_package_data=False)
